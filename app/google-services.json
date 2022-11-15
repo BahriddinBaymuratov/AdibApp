@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1030692358964",
+    "project_id": "adabiyotapp",
+    "storage_bucket": "adabiyotapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030692358964:android:a21a7bf0471f8e18c93361",
+        "android_client_info": {
+          "package_name": "com.example.adabiyotapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030692358964-uuegasmtksht72b07a0lcfo97h3hebsa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGHKEq61QUyK7fNadSeM3tVU9HPC0jQ5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030692358964-uuegasmtksht72b07a0lcfo97h3hebsa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

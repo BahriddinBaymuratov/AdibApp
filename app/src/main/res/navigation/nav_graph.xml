@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/allAdbFragment"
+        android:name="com.example.adabiyotapp.fragment.bottomnav.AllAdbFragment"
+        android:label="fragment_all_adb"
+        tools:layout="@layout/fragment_all_adb" >
+        <action
+            android:id="@+id/action_allAdbFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.adabiyotapp.fragment.bottomnav.AllAdbFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.adabiyotapp.fragment.bottomnav.AllAdbFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.adabiyotapp.fragment.HomeFragment"
+        android:label="Home fragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_SecondFragment"
+            app:destination="@id/uzbekFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/uzbekFragment"
+        android:name="com.example.adabiyotapp.fragment.tablayout.UzbekAdbFragment"
+        android:label="Uzbek Adabiyoti"
+        tools:layout="@layout/fragment_uzbekadb">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mumtozFragment"
+        android:name="com.example.adabiyotapp.fragment.tablayout.MumtozAbdFragment"
+        android:label="Mumtoz Adabiyoti"
+        tools:layout="@layout/fragment_mumtozadb" />
+    <fragment
+        android:id="@+id/jahonFragment"
+        android:name="com.example.adabiyotapp.fragment.tablayout.JahonAbdFragment"
+        android:label="Jahon Adabiyoti"
+        tools:layout="@layout/fragment_jahonadb" />
+
+</navigation>
