@@ -5,15 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.adabiyotapp.databinding.ItemLayoutBinding
 import com.example.adabiyotapp.model.Adib
 import com.squareup.picasso.Picasso
 
 class AdibAdapter : ListAdapter<Adib, AdibAdapter.AdibViewHolder>(DiffCallback()) {
+    lateinit var onClick: (Adib) -> Unit
 
     private class DiffCallback : DiffUtil.ItemCallback<Adib>() {
         override fun areItemsTheSame(oldItem: Adib, newItem: Adib): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.fullName == newItem.fullName
         }
 
         override fun areContentsTheSame(oldItem: Adib, newItem: Adib): Boolean {
@@ -39,15 +41,16 @@ class AdibAdapter : ListAdapter<Adib, AdibAdapter.AdibViewHolder>(DiffCallback()
         RecyclerView.ViewHolder(binding.root) {
         fun find(adib: Adib) {
             binding.apply {
-                Picasso.get()
+                Glide.with(imageView)
                     .load(adib.image)
                     .into(imageView)
 
-                textName.text = adib.name
+                textName.text = adib.fullName
                 textDead.text = adib.dateDead
-                textUserName.text = adib.name
             }
-            notifyDataSetChanged()
+            itemView.setOnClickListener {
+                onClick(adib)
+            }
         }
     }
 }

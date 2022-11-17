@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Adib(
-    val name: String = "",
+    val fullName: String = "",
     val wasBorn: String = "",
     val dateDead: String = "",
     val type: String = "",

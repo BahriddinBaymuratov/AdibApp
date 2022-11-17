@@ -1,31 +1,25 @@
 package com.example.adabiyotapp.adapter
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.adabiyotapp.fragment.tablayout.MumtozAbdFragment
 import com.example.adabiyotapp.fragment.tablayout.UzbekAdbFragment
 import com.example.adabiyotapp.fragment.tablayout.JahonAbdFragment
 
-class TabAdapter(fragmentManager: FragmentManager): FragmentStatePagerAdapter(fragmentManager){
+class TabAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return 3
     }
 
-    override fun getItem(position: Int): Fragment {
-        return when(position){
+    override fun createFragment(position: Int): Fragment {
+        return when (position) {
             0 -> MumtozAbdFragment()
             1 -> UzbekAdbFragment()
-            else-> JahonAbdFragment()
+            2 -> JahonAbdFragment()
+            else -> Fragment()
         }
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return when(position){
-            0-> "Mumtoz Adabiyoti"
-            1-> "O'zbek Adabayoti"
-            else-> "Jahon Adabiyoti"
-        }
-    }
+
 }

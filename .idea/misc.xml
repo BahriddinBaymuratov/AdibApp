@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/drawable/back_black.xml" value="0.1645" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/drawable/ic_baseline_bookmark_24.xml" value="0.2165" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.1645" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/drawable/ic_book.xml" value="0.1525" />
@@ -14,7 +15,7 @@
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/activity_splash.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/content_fragment.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/content_main.xml" value="0.23645833333333333" />
-        <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_add_adb.xml" value="0.4" />
+        <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_add_adb.xml" value="0.264" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_all_adb.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_detail.xml" value="0.264" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_favorite.xml" value="0.264" />
@@ -27,7 +28,7 @@
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_splash.xml" value="0.264" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_thirdfragment.xml" value="0.23645833333333333" />
-        <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_uzbekadb.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/fragment_uzbekadb.xml" value="0.1" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/layout/item_layout.xml" value="0.536" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/menu/bottom_menu.xml" value="0.1" />
         <entry key="..\:/Users/Denny/AdabitotApp/app/src/main/res/menu/menu_main.xml" value="0.23645833333333333" />

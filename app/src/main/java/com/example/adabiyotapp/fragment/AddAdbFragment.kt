@@ -1,4 +1,4 @@
-package com.example.adabiyotapp
+package com.example.adabiyotapp.fragment
 
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.fragment.findNavController
 import com.example.adabiyotapp.databinding.FragmentAddAdbBinding
 import com.example.adabiyotapp.model.Adib
@@ -20,6 +21,7 @@ import java.util.*
 class AddAdbFragment : Fragment() {
     private var _binding: FragmentAddAdbBinding? = null
     private val binding get() = _binding!!
+    private val firebaseStorage by lazy { FirebaseStorage.getInstance().getReference("images") }
     private val fireStore by lazy { FirebaseFirestore.getInstance() }
     private val list = listOf("Mumtoz Adabiyoti", "O'zbek Adabiyoti", "Jahon Adabiyoti")
     private lateinit var autoCompleteList: String
@@ -35,20 +37,26 @@ class AddAdbFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        autoComplete()
+        initViews()
+
+    }
+
+    private fun initViews() {
         binding.btnPhoto.setOnClickListener {
             launcher.launch("image/*")
         }
+        autoComplete()
 
         binding.btnSave.setOnClickListener {
-            val name = binding.nameUN.text.toString().trim()
+            val fullName = binding.nameUN.text.toString().trim()
             val wasBorn = binding.wasBorn.text.toString().trim()
             val dateDead = binding.dateDead.text.toString().trim()
             val about = binding.aboutAdib.text.toString().trim()
-
-            if (name.isNotBlank() && about.isNotBlank() && ::autoCompleteList.isInitialized) {
-                saveToDatabase(name, wasBorn, dateDead, about)
+            if (fullName.isNotBlank() && about.isNotBlank() && ::photoUrl.isInitialized && ::autoCompleteList.isInitialized) {
+                saveToDatabase(fullName, wasBorn, dateDead, about)
                 Toast.makeText(requireContext(), "SuccessFully saved", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Enter a data!", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -56,32 +64,35 @@ class AddAdbFragment : Fragment() {
 
     }
 
-    private fun saveToDatabase(name: String, wasBorn: String, dateDead: String, about: String) {
-        val fileName = UUID.randomUUID().toString()
-        val ref = FirebaseStorage.getInstance().getReference("images/$fileName")
-        ref.putFile(photoUrl)
-            .addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener {
-                    fireStore.collection("adiblar").document().set(
-                        Adib(
-                            name,
-                            wasBorn,
-                            dateDead,
-                            autoCompleteList,
-                            about,
-                            it.toString(),
-                        )
-                    ).addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            findNavController().popBackStack()
-                            Toast.makeText(requireContext(), "Successfully created", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Log.d("@@@", task.exception?.message.toString())
-                        }
-                    }
+    private fun saveToDatabase(fullName: String, wasBorn: String, dateDead: String, about: String) {
+        fireStore.collection("${autoCompleteList.subSequence(0, 6)}")
+            .add(Adib(fullName, wasBorn, dateDead, autoCompleteList, about, photoUrl.toString()))
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(requireContext(), "Successfully saved", Toast.LENGTH_SHORT)
+                        .show()
+                    findNavController().popBackStack()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        it.exception?.message.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
+
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri ?: return@registerForActivityResult
+            val random = UUID.randomUUID().toString()
+            binding.imageView.setImageURI(uri)
+            firebaseStorage.child("image$random").putFile(uri).addOnSuccessListener {
+                firebaseStorage.downloadUrl.addOnSuccessListener {
+                    photoUrl = it
+                }
+            }
+        }
 
     private fun autoComplete() {
         val adapter =
@@ -91,14 +102,6 @@ class AddAdbFragment : Fragment() {
             autoCompleteList = list[pos]
         }
     }
-
-    private val launcher = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        it?.let { imageUri ->
-            photoUrl = imageUri
-            binding.imageView.setImageURI(imageUri)
-        }
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
